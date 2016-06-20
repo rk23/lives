@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Life in Weeks</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                <h1><span style="color: #e31402">lives</span></h1>
+            </div>
+            <div class="col-xs-6">
+                <form id="birthday-submit">
+                    <input type="date" id="birthday" name="date">
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+        <div class="row chart">
+            <div class="col-xs-2">
+                <div id="group-table">
+                    <h3>Career</h3>
+                    <div>
+                        <span id="career-type-all">All</span>
+                    </div>
+                    <div>
+                        <span class="career-type">Artists</span>
+                    </div>
+                    <div>
+                        <span class="career-type">Celebrities</span>
+                    </div>
+                    <div>
+                        <span class="career-type">Entrepreneurs</span>
+                    </div>
+                    <div>
+                        <span class="career-type">Humanitarians</span>
+                    </div>
+                    <div>
+                        <span class="career-type">Military</span>
+                    </div>
+                    <div>
+                        <span class="career-type">Philosophers</span>
+                    </div>
+                    <div>
+                        <span class="career-type">Politicians</span>
+                    </div>
+                    <div>
+                        <span class="career-type">Scientists</span>
+                    </div>
+                    <div>
+                        <span class="career-type">Sports</span>
+                    </div>
+                    <div>
+                        <span class="career-type">Writers</span>
+                    </div>
+                </div>
+                <div>
+                    <h3>People</h3>
+                    <div id="people-all">
+                        <span>All</span>
+                    </div>
+                    <div id="people-table">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-8 text-left chart-row">
+                {% for x in range(100) %}
+                {% if x < 10 %}
+                    <span class="year">0{{ x }}</span>
+                {% else %}
+                    <span class="year">{{ x }}</span>
+                {% endif %}
+                {% for y in range(52) %}
+                        <span class="box" id="{{ x }}.{{ y }}"></span>
+                    {% endfor %}
+                    <br>
+                {% endfor %}
+            </div>
+            <div class="col-xs-2 info-box text-center">
+                <h3>Event</h3>
+                <p id="info-message">
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

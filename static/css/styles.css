@@ -1,0 +1,88 @@
+body {
+    font-family: "Roboto", "sans-serif";
+    background-color: white;
+}
+h1 {
+    font-weight: 900;
+    color: black;
+    font-variant: small-caps;
+}
+div {
+    color: black;
+    font-size: 12px;
+}
+input {
+    font-size: 20px;
+    font-weight: 100;
+    background-color: white;
+    padding: 10px 50px;
+    border: none;
+}
+.chart {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    line-height: 14px;
+}
+.year{
+    margin-right: 5px;
+}
+.box {
+    width: 10px;
+    height: 10px;
+    margin: .1px;
+    background-color: rgba(0,127,182,.4);
+    display: inline-block;
+    border-radius: 2px;
+}
+.reserved {
+    height: 10px;
+}
+.done {
+    background-color: rgba(80,100,200,.5);
+    border: none;
+}
+.info-box {
+    margin-top: -50px;
+    position: fixed;
+    right: 20px;
+    width: 280px;
+}
+h3 {
+    font-weight: 300;
+    font-size: 20px;
+    text-align: left;
+}
+.info-box p {
+    text-align: left;
+    font-weight: 300;
+    line-height: normal;
+}
+.years-col div {
+    margin-top: -1px;
+    margin-bottom: 1px;
+    font-weight: 100;
+    /*margin-right: -50px;*/
+}
+#birthday-submit {
+    font-size: 12px;
+    margin: 20px 0;
+}
+#group-table {
+    margin-top: -50px;
+    font-size: 16px;
+}
+#group-table div span {
+    padding: 0 5px;
+    cursor: pointer;
+}
+#people-table div span {
+    padding: 0 5px;
+    cursor: pointer;
+}
+#people-all {
+    padding: 0 5px;
+    cursor: pointer;
+}
+.selected {
+    background-color: lightcoral;
+}
