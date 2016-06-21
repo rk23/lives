@@ -568,6 +568,7 @@ var reset = function(resetPeople){
     for (var i = highlighted.length; i > 0; i--){
         highlighted[0].style.cursor = "default";
         highlighted[0].style.backgroundColor = '';
+        highlighted[0].classList.remove('personal', 'educational', 'career', 'setback', 'current', 'eol');
 
         //Currently adding event listeners w/o removing - need to fix
         highlighted[0].addEventListener('mouseover', function(){

@@ -108,5 +108,8 @@ h3 {
     background-color: black;
 }
 #ach-key {
-    /*margin-top: 100px;*/
+    /*cursor: default;*/
+}
+.ach-type {
+    cursor: default;
 }
