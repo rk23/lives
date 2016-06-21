@@ -453,6 +453,16 @@ var everybody = [
     picasso,
     swift,
 ];
+var peopleSelected;
+var careerSelected;
+var birthdaySubmit = document.getElementById('birthday-submit');
+var infoMessage = document.getElementById('info-message');
+var highlighted = document.getElementsByClassName('reserved');
+var careers = document.getElementsByClassName('career-type');
+var peopleTable = document.getElementById('people-col');
+var all = document.getElementById('career-type-all');
+var peopleAll = document.getElementById('people-all');
+
 
 var yearsSince = function(start, end){
     var diff = end - start;
@@ -489,35 +499,6 @@ var removeInnerHtml = function(){
     infoMessage.innerHTML = '';
 };
 
-var peopleSelected;
-var careerSelected;
-
-var birthdaySubmit = document.getElementById('birthday-submit');
-birthdaySubmit.addEventListener('submit', function(e){
-    e.preventDefault();
-    var previousSelection = document.getElementsByClassName('done');
-    for (var a = previousSelection.length - 1; a >= 0; a--){
-        previousSelection[a].classList.remove('done');
-    }
-
-    var birthdayRaw = document.getElementById('birthday').value.split('-');
-    var birthday = new Date(birthdayRaw[0], birthdayRaw[1] - 1, birthdayRaw[2]);
-    var today = new Date().setHours(0,0,0,0);
-    var years = ((today - birthday) / 86400000 / 365);
-    var remainder = (years % 1) * 52;
-
-    for (var i = 0; i < years - 1; i++){
-        for(var j = 0; j < 52; j++){
-            document.getElementById(i + '.' + j).classList.add('done')
-        }
-    }
-    for (var k = 0; k < remainder; k++){
-        document.getElementById(Math.floor(years) + '.' + k).classList.add('done')
-    }
-
-});
-
-var infoMessage = document.getElementById('info-message');
 var applyHover = function(person){
     for (let i = 0; i < person.events.length; i++){
         let message = person.events[i].message;
@@ -550,40 +531,6 @@ var applyHover = function(person){
         element.addEventListener('mouseleave', removeInnerHtml);
     }
 };
-
-var init = function(){
-    reset(true);
-    for (var j = 0; j < everybody.length; j++){
-        applyHover(everybody[j]);
-        addPeople(everybody[j], false)
-    }
-};
-
-var highlighted = document.getElementsByClassName('reserved');
-var setLength = parseInt(highlighted.length)
-var reset = function(resetPeople){
-
-    if (peopleSelected) peopleSelected.classList.remove('selected');
-
-    for (var i = highlighted.length; i > 0; i--){
-        highlighted[0].style.cursor = "default";
-        highlighted[0].style.backgroundColor = '';
-        highlighted[0].classList.remove('personal', 'educational', 'career', 'setback', 'current', 'eol');
-
-        //Currently adding event listeners w/o removing - need to fix
-        highlighted[0].addEventListener('mouseover', function(){
-            infoMessage.innerHTML = '';
-        });
-        //highlighted[0].removeEventListener('mouseover', setInnerHtml);
-
-        highlighted[0].classList.remove('reserved')
-    }
-    while (peopleTable.firstChild && resetPeople) {
-        if (careerSelected) careerSelected.classList.remove('selected');
-        peopleTable.removeChild(peopleTable.firstChild)
-    }
-};
-
 var addPeople = function(person, shouldApply){
     if(shouldApply){
         applyHover(person)
@@ -611,11 +558,39 @@ var addPeople = function(person, shouldApply){
 
     div.appendChild(span)
     peopleTable.appendChild(div)
-}
+};
+
+var reset = function(resetPeople){
+
+    if (peopleSelected) peopleSelected.classList.remove('selected');
+
+    for (var i = highlighted.length; i > 0; i--){
+        highlighted[0].style.cursor = "default";
+        highlighted[0].style.backgroundColor = '';
+        highlighted[0].classList.remove('personal', 'educational', 'career', 'setback', 'current', 'eol');
+
+        //Currently adding event listeners w/o removing - need to fix
+        highlighted[0].addEventListener('mouseover', function(){
+            infoMessage.innerHTML = '';
+        });
+        //highlighted[0].removeEventListener('mouseover', setInnerHtml);
+
+        highlighted[0].classList.remove('reserved')
+    }
+    while (peopleTable.firstChild && resetPeople) {
+        if (careerSelected) careerSelected.classList.remove('selected');
+        peopleTable.removeChild(peopleTable.firstChild)
+    }
+};
+var init = function(){
+    reset(true);
+    for (var j = 0; j < everybody.length; j++){
+        applyHover(everybody[j]);
+        addPeople(everybody[j], false)
+    }
+};
 
 // Select a specific career type
-var careers = document.getElementsByClassName('career-type');
-var peopleTable = document.getElementById('people-col');
 for (let i = 0; i < careers.length; i++){
     careers[i].addEventListener('click', function(){
         reset(true);
@@ -635,15 +610,35 @@ for (let i = 0; i < careers.length; i++){
     })
 }
 
-
 // Select all career types
-var all = document.getElementById('career-type-all');
 all.addEventListener('click', function(){
     init();
 });
-var peopleAll = document.getElementById('people-all');
 peopleAll.addEventListener('click', function(){
     init();
+});
+birthdaySubmit.addEventListener('submit', function(e){
+    e.preventDefault();
+    var previousSelection = document.getElementsByClassName('done');
+    for (var a = previousSelection.length - 1; a >= 0; a--){
+        previousSelection[a].classList.remove('done');
+    }
+
+    var birthdayRaw = document.getElementById('birthday').value.split('-');
+    var birthday = new Date(birthdayRaw[0], birthdayRaw[1] - 1, birthdayRaw[2]);
+    var today = new Date().setHours(0,0,0,0);
+    var years = ((today - birthday) / 86400000 / 365);
+    var remainder = (years % 1) * 52;
+
+    for (var i = 0; i < years - 1; i++){
+        for(var j = 0; j < 52; j++){
+            document.getElementById(i + '.' + j).classList.add('done')
+        }
+    }
+    for (var k = 0; k < remainder; k++){
+        document.getElementById(Math.floor(years) + '.' + k).classList.add('done')
+    }
+
 });
 
 init();
