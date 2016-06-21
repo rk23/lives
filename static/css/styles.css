@@ -12,16 +12,19 @@ div {
     font-size: 12px;
 }
 input {
-    font-size: 20px;
-    font-weight: 100;
+    font-size: 14px;
+    /*font-weight: 100;*/
     background-color: white;
-    padding: 10px 50px;
     border: none;
+    /*display: block;*/
 }
 .chart {
     margin-top: 50px;
     margin-bottom: 100px;
     line-height: 14px;
+}
+.chart-row {
+    margin-top: -50px;
 }
 .year{
     margin-right: 5px;
@@ -32,7 +35,7 @@ input {
     margin: .1px;
     background-color: rgba(0,127,182,.4);
     display: inline-block;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 .reserved {
     height: 10px;
@@ -49,7 +52,7 @@ input {
 }
 h3 {
     font-weight: 300;
-    font-size: 20px;
+    font-size: 16px;
     text-align: left;
 }
 .info-box p {
@@ -75,7 +78,7 @@ h3 {
     padding: 0 5px;
     cursor: pointer;
 }
-#people-table div span {
+#people-col div span {
     padding: 0 5px;
     cursor: pointer;
 }
@@ -85,4 +88,25 @@ h3 {
 }
 .selected {
     background-color: lightcoral;
+}
+.educational {
+    background-color: blue;
+}
+.personal {
+    background-color: darkolivegreen;
+}
+.career {
+    background-color: purple;
+}
+.setback {
+    background-color: #E31402;
+}
+.current {
+    background-color: teal;
+}
+.eol {
+    background-color: black;
+}
+#ach-key {
+    /*margin-top: 100px;*/
 }

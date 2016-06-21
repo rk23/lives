@@ -1,10 +1,10 @@
 var milestone = {
-    personal: "orange",
-    educational: "blue",
-    financial: "#009642",
-    career: "purple",
-    setback: "#E31402",
-    eol: "black"
+    personal: 'personal',
+    educational: "educational",
+    career: "career",
+    setback: "setback",
+    current: 'current',
+    eol: "eol"
 };
 var rowling = {
     name: 'Joanne K. Rowling',
@@ -35,6 +35,11 @@ var rowling = {
             date: new Date(1999, 6, 8),
             message: 'JK Rowling gets the third Harry Potter book published',
             type: milestone.career
+        },
+        {
+            date: new Date(),
+            message: 'Current week in J.K. Rowling\'s life',
+            type: milestone.current
         }
     ]
 };
@@ -139,7 +144,7 @@ var musk = {
         {
             date: new Date(1999, 1, 5),
             message: 'Musk sells Zip2 for over $300 million and keeps $22 million himself',
-            type: milestone.financial
+            type: milestone.career
         },
         {
             date: new Date(1999, 1, 15),
@@ -149,7 +154,12 @@ var musk = {
         {
             date: new Date(2002, 6, 15),
             message: 'Paypal is bought by eBay and Musk takes home $165 million',
-            type: milestone.financial
+            type: milestone.career
+        },
+        {
+            date: new Date(),
+            message: 'Current week in Elon Musk\'s life',
+            type: milestone.current
         }
     ]
 };
@@ -167,6 +177,11 @@ var gates = {
             date: new Date(1974, 3, 4),
             message: 'Bill Gates and Paul Allen form partnership called Micro-Soft',
             type: milestone.career
+        },
+        {
+            date: new Date(),
+            message: 'Current week in Bill Gate\'s life',
+            type: milestone.current
         }
     ]
 };
@@ -259,6 +274,11 @@ var oprah = {
             date: new Date(2002, 8, 22),
             message: 'Oprah wins the Bob Hope Humanitarian award',
             type: milestone.career
+        },
+        {
+            date: new Date(),
+            message: 'Current week in Oprah\'s life',
+            type: milestone.current
         }
     ]
 };
@@ -318,7 +338,7 @@ var jfk = {
             date: new Date(1943, 7, 2),
             message: 'JFK\'s PT boat is rammed by a Japanese destroyer. Under his leadership, most of the crew is' +
             ' eventually rescued. JFK receives the Purple Heart for his heroics.',
-            type: milestone.career
+            type: milestone.personal
         },
         {
             date: new Date(1944, 7, 12),
@@ -380,7 +400,44 @@ var mAli = {
             type: milestone.eol
         }
     ]
-}
+};
+var swift = {
+    name: 'Taylor Swift',
+    birthday: new Date(1989, 11, 13),
+    category: 'celebrities',
+    events: [
+        {
+            date: new Date(2001, 11, 27),
+            message: 'Swift starts writing songs two days after receiving her first guitar for Christmas.',
+            type: milestone.career
+        },
+        {
+            date: new Date(2006, 5, 19),
+            message: 'Taylor Swift releases Tim McGraw, her first single.',
+            type: milestone.career
+        },
+        {
+            date: new Date(2006, 9, 24),
+            message: 'Taylor Swift releases debut album which peaked at #1 on the US Country Chart and #5 Billboard.',
+            type: milestone.career
+        },
+        {
+            date: new Date(2007, 0, 27),
+            message: '"Tim McGraw" Reaches Number 6 On Billboard\'s Hot Country Songs',
+            type: milestone.career
+        },
+        {
+            date: new Date(2008, 6, 25),
+            message: 'Taylor Swift graduates high school',
+            type: milestone.educational
+        },
+        {
+            date: new Date(),
+            message: 'Current week in Taylor Swift\'s life',
+            type: milestone.current
+        }
+    ]
+};
 
 var everybody = [
     einstein,
@@ -394,6 +451,7 @@ var everybody = [
     napoleon,
     oprah,
     picasso,
+    swift,
 ];
 
 var yearsSince = function(start, end){
@@ -442,11 +500,11 @@ birthdaySubmit.addEventListener('submit', function(e){
         previousSelection[a].classList.remove('done');
     }
 
-    var birthdayRaw = document.getElementById('birthday').value.split('-')
-    var birthday = new Date(birthdayRaw[0], birthdayRaw[1] - 1, birthdayRaw[2])
-    var today = new Date().setHours(0,0,0,0)
-    var years = ((today - birthday) / 86400000 / 365)
-    var remainder = (years % 1) * 52
+    var birthdayRaw = document.getElementById('birthday').value.split('-');
+    var birthday = new Date(birthdayRaw[0], birthdayRaw[1] - 1, birthdayRaw[2]);
+    var today = new Date().setHours(0,0,0,0);
+    var years = ((today - birthday) / 86400000 / 365);
+    var remainder = (years % 1) * 52;
 
     for (var i = 0; i < years - 1; i++){
         for(var j = 0; j < 52; j++){
@@ -461,24 +519,31 @@ birthdaySubmit.addEventListener('submit', function(e){
 
 var infoMessage = document.getElementById('info-message');
 var applyHover = function(person){
-    for (var i = 0; i < person.events.length; i++){
+    for (let i = 0; i < person.events.length; i++){
         let message = person.events[i].message;
+        let yearWeek = timeSince(person.birthday, person.events[i].date);
         setInnerHtml = function(){
-            infoMessage.innerHTML = infoMessage.innerHTML +  message;
+            if(infoMessage.innerHTML){
+                var breaks = '<br><br>'
+            } else {
+                var breaks = ''
+            }
+            infoMessage.innerHTML = infoMessage.innerHTML + breaks + '<strong>' + person.events[i].date.toDateString()
+              + '</strong><br><strong>' + yearWeek.split('.')[0] + ' years old</strong><span>: ' + message + '</span>';
         }
 
-        var element = document.getElementById(timeSince(person.birthday, person.events[i].date))
-        element.style.backgroundColor = person.events[i]['type'];
+        var element = document.getElementById(yearWeek);
         element.style.cursor = "pointer";
 
 
         if (element.classList.contains('reserved')){
             //console.log('Overwriting previous event. Person: ' + person.name + ' with event: ' +
             //  person.events[i].message)
-            message = infoMessage.innerHTML + '<br><br>' +  message;
+            message = infoMessage.innerHTML + message;
             element.style.backgroundColor = '#E0E0E0';
         } else {
             element.classList.add('reserved');
+            element.classList.add(person.events[i].type);
         }
 
         element.addEventListener('mouseover', setInnerHtml);
@@ -524,7 +589,7 @@ var addPeople = function(person, shouldApply){
     }
 
     var div = document.createElement('div');
-    var span = document.createElement('span');
+    let span = document.createElement('span');
     span.innerHTML = person.name;
     span.id = person.name;
 
@@ -536,13 +601,20 @@ var addPeople = function(person, shouldApply){
         applyHover(person)
     });
 
+    span.addEventListener('mouseover', function(){
+        span.style.backgroundColor = 'lightcoral';
+    });
+    span.addEventListener('mouseleave', function(){
+        span.style.backgroundColor = ''
+    });
+
     div.appendChild(span)
     peopleTable.appendChild(div)
 }
 
 // Select a specific career type
 var careers = document.getElementsByClassName('career-type');
-var peopleTable = document.getElementById('people-table');
+var peopleTable = document.getElementById('people-col');
 for (let i = 0; i < careers.length; i++){
     careers[i].addEventListener('click', function(){
         reset(true);
@@ -553,8 +625,15 @@ for (let i = 0; i < careers.length; i++){
                 addPeople(everybody[j], true)
             }
         }
+    });
+    careers[i].addEventListener('mouseover', function(){
+        careers[i].style.backgroundColor = 'lightcoral'
+    });
+    careers[i].addEventListener('mouseleave', function(){
+        careers[i].style.backgroundColor = '';
     })
 }
+
 
 // Select all career types
 var all = document.getElementById('career-type-all');

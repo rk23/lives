@@ -11,18 +11,39 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-4">
-                <h1><span style="color: #e31402">lives</span></h1>
-            </div>
-            <div class="col-xs-6">
-                <form id="birthday-submit">
-                    <input type="date" id="birthday" name="date">
-                    <input type="submit">
-                </form>
+                <h1><span style="color: #e31402">lives</span>visualized</h1>
             </div>
         </div>
         <div class="row chart">
             <div class="col-xs-2">
                 <div id="group-table">
+                    <div class="text-left" id="ach-key">
+                        <h3>Achievement Type</h3>
+                        <div>
+                            <span class="box personal"></span>
+                            <span class="ach-type">Personal</span>
+                        </div>
+                        <div>
+                            <span class="box educational"></span>
+                            <span class="ach-type">Educational</span>
+                        </div>
+                        <div>
+                            <span class="box career"></span>
+                            <span class="ach-type">Career</span>
+                        </div>
+                        <div>
+                            <span class="box setback"></span>
+                            <span class="ach-type">Setback</span>
+                        </div>
+                        <div>
+                            <span class="box current"></span>
+                            <span class="ach-type">Current week in life</span>
+                        </div>
+                        <div>
+                            <span class="box eol"></span>
+                            <span class="ach-type">End of life</span>
+                        </div>
+                    </div>
                     <h3>Career</h3>
                     <div>
                         <span id="career-type-all">All</span>
@@ -63,11 +84,15 @@
                     <div id="people-all">
                         <span>All</span>
                     </div>
-                    <div id="people-table">
+                    <div id="people-col">
                     </div>
                 </div>
             </div>
             <div class="col-xs-8 text-left chart-row">
+                <form id="birthday-submit" class="text-center">
+                    <input type="date" id="birthday" name="date">
+                    <input type="submit">
+                </form>
                 {% for x in range(100) %}
                 {% if x < 10 %}
                     <span class="year">0{{ x }}</span>
@@ -82,8 +107,7 @@
             </div>
             <div class="col-xs-2 info-box text-center">
                 <h3>Event</h3>
-                <p id="info-message">
-                </p>
+                <p id="info-message"></p>
             </div>
         </div>
     </div>
